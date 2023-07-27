@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "./redux/store";
 import { fetchProdutos } from "./redux/slices/api.slice.produtos";
 import ProdutosList from "./components/listProdutos";
+import GridCardList from "./components/gridCardList"; // Importando o novo componente GridCardList
 import "./index.css";
 import NavBarCustom from "./components/navbar";
 
@@ -36,9 +37,14 @@ function App() {
             </div>
           ) : null}
 
-          <div style={{ overflow: "scroll", height: "400px" }}>
-            <ProdutosList />
-          </div>
+          {/* Utilizando o componente condicional para exibir a tabela ou o grid card */}
+          {isAdmin ? (
+            <div style={{ overflow: "scroll", height: "400px" }}>
+              <ProdutosList />
+            </div>
+          ) : (
+            <GridCardList />
+          )}
         </div>
       )}
     </div>

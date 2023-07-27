@@ -10,33 +10,32 @@ export default function NavBarCustom() {
 
   const { isAdmin } = useSelector((state: RootState) => state.apiLogin);
   const dispatch = useDispatch();
+  const { produtos } = useSelector((state: RootState) => state.carrinho); // Obtendo a lista de produtos no carrinho
+  const quantidadeTotalCarrinho = produtos.reduce((total, produto) => total + produto.quantidade, 0);
 
   function Logout() {
     dispatch(logout());
     navigate("/");
   }
+
   return (
-    <div>
-      <Navbar
-        style={{ position: "sticky", top: "0", backgroundColor: "lightblue" }}
-      >
-        <NavbarBrand>Loja Online</NavbarBrand>
+    <Navbar bg="light" expand="lg" sticky="top">
+      <NavbarBrand>Loja Online</NavbarBrand>
 
-        <NavItem onClick={() => navigate("/home")}>
-          <NavLink>Produtos</NavLink>
+      <NavItem onClick={() => navigate("/home")}>
+        <NavLink>Produtos</NavLink>
+      </NavItem>
+
+      {/* SE USUARIO ISADMIN MOSTRA OPÇÃO DO CARRINHO */}
+      {!isAdmin && (
+        <NavItem onClick={() => navigate("/cart")}>
+          <NavLink>Carrinho <span className="badge bg-primary">{quantidadeTotalCarrinho}</span></NavLink>
         </NavItem>
+      )}
 
-        {/* SE USUARIO ISADMIN MOSTRA OPÇÃO DO CARRINHO */}
-        {!isAdmin ? (
-          <NavItem onClick={() => navigate("/cart")}>
-            <NavLink>Carrinho</NavLink>
-          </NavItem>
-        ) : null}
-
-        <NavItem onClick={() => Logout()}>
-          <NavLink>Logout</NavLink>
-        </NavItem>
-      </Navbar>
-    </div>
+      <NavItem onClick={() => Logout()}>
+        <NavLink>Logout</NavLink>
+      </NavItem>
+    </Navbar>
   );
 }

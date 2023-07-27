@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Form, Button } from "react-bootstrap"; // Importando o componente Form do Bootstrap
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap";
@@ -25,59 +26,54 @@ export default function FormularioProduto() {
   };
 
   return (
-    <div
-      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-    >
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
       <h3 className="mt-3">Inserir Novo Produto</h3>
-      <form onSubmit={handleSubmit}>
-        <div className="row mb-3">
-          <label className="col-sm-3 col-form-lable">Nome</label>
+      <Form onSubmit={handleSubmit}> {/* Utilizando o componente Form do Bootstrap */}
+        <Form.Group className="row mb-3">
+          <Form.Label className="col-sm-3 col-form-lable">Nome</Form.Label>
           <div className="col-md-8">
-            <input
+            <Form.Control
               type="text"
-              className="form-control"
               name="nome"
               value={inputProduto.nome}
               onChange={handleInput}
             />
           </div>
-        </div>
+        </Form.Group>
 
-        <div className="row mb-3">
-          <label className="col-sm-3 col-form-lable">Preço</label>
+        <Form.Group className="row mb-3">
+          <Form.Label className="col-sm-3 col-form-lable">Preço</Form.Label>
           <div className="col-md-8">
-            <input
+            <Form.Control
               type="number"
-              className="form-control"
               name="preco"
               value={inputProduto.preco}
               onChange={handleInput}
             />
           </div>
-        </div>
+        </Form.Group>
 
-        <div className="row mb-3">
-          <label className="col-sm-3 col-form-lable">Estoque</label>
+        <Form.Group className="row mb-3">
+          <Form.Label className="col-sm-3 col-form-lable">Estoque</Form.Label>
           <div className="col-md-8">
-            <input
+            <Form.Control
               type="number"
-              className="form-control"
               name="estoque"
               value={inputProduto.estoque}
               onChange={handleInput}
             />
           </div>
-        </div>
+        </Form.Group>
 
-        <div className="row mb-3">
-          <label className="col-sm-3 col-form-lable"></label>
+        <Form.Group className="row mb-3">
+          <Form.Label className="col-sm-3 col-form-lable"></Form.Label>
           <div className="col-md-1">
-            <button type="submit" className="btn btn-primary bnt-lg">
+            <Button type="submit" variant="primary" size="lg">
               Submit
-            </button>
+            </Button>
           </div>
-        </div>
-      </form>
+        </Form.Group>
+      </Form>
     </div>
   );
 }
